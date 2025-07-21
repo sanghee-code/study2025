@@ -1,0 +1,46 @@
+/* 언어설정 */
+@charset 'UTF-8';
+
+/* 전체설정 */
+* {box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color;}
+
+/* header */
+.logo {text-align: right;
+    padding: 15px;
+    padding-right: 250px;}
+
+.intro {font-size: 50px;
+    font-weight: bold;
+    padding: 80px;
+    padding-left: 250px;}
+
+.intro p {margin: 25px;}
+
+#sizeA {font-size: 60px;}
+
+#sizeB {font-size: 70px;   
+    text-decoration: underline;
+    text-underline-offset: 55px;
+    color: tomato;}
+
+/* main */
+.mainA {background-color: blanchedalmond;
+    padding: 80px;
+    margin: 0 250px;}
+
+.job {font-size: 45px;
+    font-weight: bold;
+    padding-right: 750px;
+    padding-bottom: 15px;
+    border-bottom: solid 4px tomato;
+    }
+
+.pick {font-size: 23px;}
+
+.todo {font-size: 23px;
+    display: flex;}
+
+
