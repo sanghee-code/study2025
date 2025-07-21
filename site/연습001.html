@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>와플 마켓 - 맛있는 와플 전문점</title>
+<style>
+  /* 기본 리셋 */
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background: #fff8e1;
+    color: #5d4037;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    background-color: #ffca28;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  header h1 {
+    font-size: 2.8rem;
+    letter-spacing: 3px;
+  }
+  header nav {
+    margin-top: 10px;
+  }
+  header nav a {
+    color: #5d4037;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+  header nav a:hover {
+    color: #bf360c;
+  }
+
+  main {
+    flex: 1;
+    padding: 30px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* 와플 메뉴 섹션 */
+  section.menu {
+    margin-bottom: 50px;
+  }
+  section.menu h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    border-bottom: 3px solid #ffb300;
+    display: inline-block;
+    padding-bottom: 5px;
+  }
+
+  /* 와플 카드 리스트 */
+  .waffle-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .waffle-card {
+    background: #fff3e0;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    flex: 1 1 calc(33.333% - 20px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+  .waffle-card:hover {
+    transform: translateY(-8px);
+  }
+  .waffle-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+  .waffle-card .content {
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .waffle-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+  }
+  .waffle-card p {
+    flex-grow: 1;
+    font-size: 0.95rem;
+    color: #6d4c41;
+  }
+  .waffle-card .price {
+    font-weight: 700;
+    margin-top: 12px;
+    font-size: 1.1rem;
+    color: #bf360c;
+  }
+
+  /* 와플 주문 폼 */
+  section.order {
+    background: #ffe082;
+    padding: 30px 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  section.order h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px 30px;
+  }
+  label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    display: block;
+  }
+  input[type="text"],
+  input[type="email"],
+  input[type="number"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 8px 12px;
+    border: 2px solid #bf360c;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.3s ease;
+  }
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="number"]:focus,
+  select:focus,
+  textarea:focus {
+    border-color: #ff6f00;
+    outline: none;
+  }
+  textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+  /* 주문 버튼 */
+  button[type="submit"] {
+    grid-column: 1 / -1;
+    padding: 14px 0;
+    background-color: #bf360c;
+    border: none;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    font-weight: 700;
+    transition: background-color 0.3s ease;
+  }
+  button[type="submit"]:hover {
+    background-color: #ff6f00;
+  }
+
+  /* 와플 재료 테이블 */
+  section.ingredients {
+    margin-top: 50px;
+  }
+  section.ingredients h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    border-bottom: 3px solid #ffb300;
+    display: inline-block;
+    padding-bottom: 5px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff3e0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  thead {
+    background-color: #ffca28;
+  }
+  thead th {
+    padding: 12px;
+    text-align: left;
+    font-weight: 700;
+    color: #5d4037;
+    border-bottom: 2px solid #bf360c;
+  }
+  tbody td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #ffd54f;
+    color: #6d4c41;
+  }
+  tbody tr:hover {
+    background-color: #fff8e1;
+  }
+
+  /* footer */
+  footer {
+    background-color: #ffca28;
+    padding: 15px 20px;
+    text-align: center;
+    color: #5d4037;
+    font-weight: 600;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+  }
+
+  /* 반응형 */
+  @media (max-width: 900px) {
+    .waffle-card {
+      flex: 1 1 calc(50% - 20px);
+    }
+    form {
+      grid-template-columns: 1fr;
+    }
+    button[type="submit"] {
+      grid-column: 1;
+    }
+  }
+  @media (max-width: 500px) {
+    header h1 {
+      font-size: 2rem;
+    }
+    .waffle-card {
+      flex: 1 1 100%;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>와플 마켓</h1>
+  <nav>
+    <a href="#menu">메뉴</a>
+    <a href="#order">주문하기</a>
+    <a href="#ingredients">재료 소개</a>
+  </nav>
+</header>
+
+<main>
+  <!-- 메뉴 섹션 -->
+  <section id="menu" class="menu">
+    <h2>와플 메뉴</h2>
+    <div class="waffle-list">
+      <article class="waffle-card">
+        <img src="https://images.unsplash.com/photo-1585238342028-45a9eab0e5e9?auto=format&fit=crop&w=400&q=80" alt="클래식 와플" />
+        <div class="content">
+          <h3>클래식 와플</h3>
+          <p>바삭한 식감과 부드러운 버터향이 일품인 전통 와플입니다.</p>
+          <div class="price">5,000원</div>
+        </div>
+      </article>
+      <article class="waffle-card">
+        <img src="https://images.unsplash.com/photo-1563805042-7684bfb0f49f?auto=format&fit=crop&w=400&q=80" alt="초코 와플" />
+        <div class="content">
+          <h3>초코 와플</h3>
+          <p>진한 초콜릿 소스와 달콤한 초코칩이 듬뿍 들어간 와플.</p>
+          <div class="price">6,000원</div>
+        </div>
+      </article>
+      <article class="waffle-card">
+        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=400&q=80" alt="베리 와플" />
+        <div class="content">
+          <h3>베리 와플</h3>
+          <p>신선한 딸기, 블루베리와 크림이 어우러진 상큼한 와플.</p>
+          <div class="price">6,500원</div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 주문하기 섹션 -->
+  <section id="order" class="order">
+    <h2>와플 주문하기</h2>
+    <form action="#" method="post" novalidate>
+      <div>
+        <label for="name">이름</label>
+        <input type="text" id="name" name="name" placeholder="홍길동" required />
+      </div>
+      <div>
+        <label for="email">이메일</label>
+        <input type="email" id="email" name="email" placeholder="example@example.com" required />
+      </div>
+      <div>
+        <label for="waffle-type">와플 종류</label>
+        <select id="waffle-type" name="waffle-type" required>
+          <option value="">선택하세요</option>
+          <option value="classic">클래식 와플</option>
+          <option value="choco">초코 와플</option>
+          <option value="berry">베리 와플</option>
+        </select>
+      </div>
+      <div>
+        <label for="quantity">수량</label>
+        <input type="number" id="quantity" name="quantity" min="1" max="10" value="1" required />
+      </div>
+      <div style="grid-column: 1 / -1;">
+        <label for="address">배송 주소</label>
+        <textarea id="address" name="address" placeholder="주소를 입력해주세요" required></textarea>
+      </div>
+      <button type="submit">주문하기</button>
+    </form>
+  </section>
+
+  <!-- 재료 소개 섹션 -->
+  <section id="ingredients" class="ingredients">
+    <h2>와플 주요 재료</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>재료</th>
+          <th>설명</th>
+          <th>원산지</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>밀가루</td>
+          <td>부드럽고 촉촉한 와플 반죽의 기본 재료</td>
+          <td>국내산</td>
+        </tr>
+        <tr>
+          <td>버터</td>
+          <td>풍미와 고소함을 더하는 고급 버터 사용</td>
+          <td>뉴질랜드</td>
+        </tr>
+        <tr>
+          <td>계란</td>
+          <td>신선한 계란으로 부드러운 식감을 구현</td>
+          <td>국내산</td>
+        </tr>
+        <tr>
+          <td>초콜릿</td>
+          <td>진한 맛을 위한 벨기에산 초콜릿</td>
+          <td>벨기에</td>
+        </tr>
+        <tr>
+          <td>과일</td>
+          <td>제철 신선한 베리류 사용</td>
+          <td>국내산 및 해외산</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</main>
+
+<footer>
+  &copy; 2025 와플 마켓. All rights reserved.
+</footer>
+
+</body>
+</html>

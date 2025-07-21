@@ -1,0 +1,128 @@
+/* 언어 설정 */
+@charset "UTF-8";
+
+/* 전체 초기화 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+  color: #000;
+}
+ul, ol {
+  list-style: none;
+}
+
+/* 레이아웃 설정 */
+header.boxA {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+}
+
+/* 로고 설정 */
+.logo h1 {
+  font-size: 30px;
+}
+.logo h1 a {
+  color: red;
+  font-weight: bold;
+}
+
+/* 내비게이션 설정 */
+.nav ul {
+  display: flex;
+  gap: 15px;
+}
+.nav li {}
+.nav a {
+  display: block;
+  padding: 5px 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+/* 상단 이미지 설정 */
+.topImg {
+  width: 100%;
+  max-height: 200px; 
+  object-fit: cover;
+  display: block;
+  vertical-align: bottom;
+}
+
+/* 뉴스 영역 설정 */
+.news {
+  padding: 20px;
+}
+.news h2 {
+  font-size: 18px;
+  color: red; 
+  margin-bottom: 10px;
+}
+.news ul {}
+.news li {}
+.news a {
+  display: block;
+  padding: 5px 0;
+  font-size: 14px;
+  color: #333;
+  border-bottom: 2px dotted #ddd;
+}
+.news time {
+  color: #888;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+/* 푸터 설정 */
+footer.box5 {
+  background: #f5f5f5;
+  padding: 15px;
+  text-align: center;
+}
+.copyrignt p {
+  font-size: 14px;
+  color: #666;
+}
+
+/* 미디어쿼리 구간 ############################## */
+
+/* 모바일 (599px 이하) */
+@media (max-width: 599px) {
+  header.boxA {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav ul {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .topImg {
+    max-height: 150px; /* 모바일에서 더 작게 */
+  }
+}
+
+/* 태블릿 (768px 이상) */
+@media (min-width: 768px) {
+  .boxA {
+    display: flex;
+  }
+
+  .boxA > div {
+    width: 50%;
+  }
+}
+
+/* 데스크탑 (1280px 이상) */
+@media (min-width: 1280px) {
+  .box3 {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+}
